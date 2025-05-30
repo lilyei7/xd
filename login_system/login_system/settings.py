@@ -17,12 +17,13 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tu_clave_secreta_muy_segura'  # Genera una nueva clave secreta
+SECRET_KEY = 'tu-clave-secreta'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True  # Set to True during development to serve static files
 
-ALLOWED_HOSTS = ['punto1208.com', 'www.punto1208.com', '31.97.42.133']  # Cambia esto según tu dominio
+# Cambiado de ['localhost', '127.0.0.1', '*'] a los hosts específicos
+ALLOWED_HOSTS = ['punto1208.com', 'www.punto1208.com', '31.97.42.133', 'localhost', '127.0.0.1']  # Cambia esto según tu dominio
 
 # Application definition
 INSTALLED_APPS = [
@@ -69,12 +70,8 @@ WSGI_APPLICATION = 'login_system.wsgi.application'
 # Configuración de la base de datos SQLite3
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'webolcha',
-        'USER': 'webolcha_user',
-        'PASSWORD': 'Punto1208MX#',  # Usa una contraseña derivada pero no exactamente igual a la del servidor
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -107,14 +104,16 @@ USE_TZ = True
 
 # Configuración de archivos estáticos
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/webolcha/static'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/webolcha/media'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    # Use os.path.join to handle path separators properly
+    os.path.join(BASE_DIR, 'accounts', 'static'),  # Fixed path
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Configuración de seguridad
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True  # Solo activar cuando tengas HTTPS configurado
+# Media files (user uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Custom user model
 AUTH_USER_MODEL = 'accounts.User'
