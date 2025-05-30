@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Contenido HTML existente -->
+    <!-- ... -->
+
+    <!-- Token CSRF -->
+    {% csrf_token %}
+
+    <!-- Permisos de usuario -->
+    {{ permisos|json_script:"user-permissions" }}
+    <script>
+        window.userPermissions = JSON.parse(document.getElementById('user-permissions').textContent);
+        window.userRole = "{{ rol }}";
+        console.log("Permisos del usuario cargados:", window.userPermissions);
+    </script>
+
+    <!-- Scripts básicos -->
+    <script src="{% static 'accounts/js/permissions.js' %}"></script>
+    <script src="{% static 'accounts/js/usuarios.js' %}"></script>
+    <script src="{% static 'accounts/js/menu.js' %}"></script>
+
+    <!-- Scripts de componentes -->
+    <script src="{% static 'accounts/js/proveedores.js' %}"></script>
+    <script src="{% static 'accounts/js/insumos.js' %}"></script>
+    <script src="{% static 'accounts/js/insumos_compuestos.js' %}"></script>
+
+    <!-- Scripts de recetas - ORDEN CORRECTO -->
+    <script src="{% static 'accounts/js/recetas-core.js' %}"></script>
+    <script src="{% static 'accounts/js/recetas-data.js' %}"></script>
+    <script src="{% static 'accounts/js/recetas-ingredientes.js' %}"></script>
+    <script src="{% static 'accounts/js/recetas-modal.js' %}"></script>
+    <script src="{% static 'accounts/js/recetas-crud.js' %}"></script>
+    <script src="{% static 'accounts/js/recetas.js' %}"></script>
+
+    <!-- Scripts finales -->
+    <script src="{% static 'accounts/js/entradas_salidas.js' %}"></script>
+    <script src="{% static 'accounts/js/dashboard.js' %}"></script>
+    <script src="{% static 'accounts/js/notifications.js' %}"></script>
+</body>
+</html>
