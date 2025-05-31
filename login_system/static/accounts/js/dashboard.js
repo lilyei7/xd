@@ -129,6 +129,16 @@ function initializeSubmenuLinks() {
                 alert('Error: Módulo de Entradas y Salidas no disponible');
             }
         }},
+        // Añadir nuevo manejador para el botón de entradas y salidas de insumos
+        { id: 'entradas_salidas_insumos', handler: function() { 
+            console.log('[DEBUG] Click en Entradas y Salidas de Insumos');
+            if (typeof window.loadEntradasSalidasInsumosContent === 'function') {
+                window.loadEntradasSalidasInsumosContent();
+            } else {
+                console.error('La función loadEntradasSalidasInsumosContent no está disponible');
+                alert('Error: Módulo de Entradas y Salidas de Insumos no disponible');
+            }
+        }},
         { id: 'proveedores', handler: loadProveedoresContent },
         { id: 'menu_insumos_compuestos', handler: loadInsumosCompuestosContent },
         { id: 'menu_insumos_elaborados', handler: loadInsumosElaboradosContent },

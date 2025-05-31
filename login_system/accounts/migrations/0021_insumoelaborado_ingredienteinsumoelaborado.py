@@ -43,7 +43,10 @@ class Migration(migrations.Migration):
             ],
             options={
                 'db_table': 'ingredientes_insumo_elaborado',
-                'constraints': [models.CheckConstraint(check=models.Q(...), name='ingrediente_elaborado_solo_un_tipo')],
+                'constraints': [models.CheckConstraint(check=models.Q(
+                    models.Q(insumo__isnull=False, insumo_compuesto__isnull=True) |
+                    models.Q(insumo__isnull=True, insumo_compuesto__isnull=False)
+                ), name='ingrediente_elaborado_solo_un_tipo')],
             },
         ),
     ]

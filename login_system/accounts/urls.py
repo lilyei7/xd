@@ -14,6 +14,7 @@ from .views_recetas import recetas_crud, receta_detail, obtener_insumos_para_rec
 from .views_elaborados import insumos_elaborados_crud, obtener_insumos_para_elaborado, insumo_elaborado_detail
 from .views_elaborados import obtener_insumos_compuestos_para_elaborado
 from .views_recetas import obtener_insumos_elaborados_para_recetas  # Importar la función específica
+from .views_movimientos_insumos import movimientos_insumos_crud
 
 urlpatterns = [
     # URLs principales
@@ -75,4 +76,7 @@ urlpatterns = [
 
     # Añadir esta URL
     path('insumos-elaborados-para-recetas/', obtener_insumos_elaborados_para_recetas, name='obtener_insumos_elaborados_para_recetas'),
+
+    # URLs para movimientos de insumos compuestos y elaborados
+    path('movimientos-insumos/', movimientos_insumos_crud, name='movimientos_insumos_crud'),
 ]
