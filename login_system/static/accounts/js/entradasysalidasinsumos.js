@@ -784,7 +784,7 @@ async function handleMovimientoInsumosSubmit(event) {
     
     try {
         // Recopilar datos del formulario
-        const tipo = document.querySelector('input[name="tipoMovimientoInsumos"]:checked')?.value;
+        const tipo = 'entrada'; // Siempre es 'entrada' ya que solo manejamos elaboraciones
         const tipoInsumo = document.querySelector('input[name="tipoInsumo"]:checked')?.value;
         const sucursalId = document.getElementById('sucursalMovimientoInsumos').value;
         const insumoId = document.getElementById('insumoMovimientoCompuestoElaborado').value;
@@ -793,7 +793,6 @@ async function handleMovimientoInsumosSubmit(event) {
         const motivo = document.getElementById('motivoMovimientoInsumos').value;
         
         // Validaciones
-        if (!tipo) throw new Error('Seleccione el tipo de movimiento');
         if (!tipoInsumo) throw new Error('Seleccione el tipo de insumo');
         if (!sucursalId) throw new Error('Seleccione una sucursal');
         if (!insumoId) throw new Error('Seleccione un insumo');
